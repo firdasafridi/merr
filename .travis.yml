@@ -7,6 +7,6 @@ go:
 
 branches:
   only:
-    - master
+    - main
 
 script: env GO111MODULE=on make test testrace
