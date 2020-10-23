@@ -27,17 +27,17 @@ Install using `go get github.com/firdasafridi/merr`.
 The `Set` function is used to create a list of errors. If you need to set prefix you can add it with `SetPrefix`.
 
 ```go
-	var mulerr merr.Error
+var mulerr merr.Error
 
-	if err := sampleLogic1(); err != nil {
-		mulerr.Set(err)
-	}
+if err := sampleLogic1(); err != nil {
+	mulerr.Set(err)
+}
 
-	if err := sampleLogic2(); err != nil {
-		mulerr.SetPrefix("Sample Prefix", err)
-    }
+if err := sampleLogic2(); err != nil {
+	mulerr.SetPrefix("Sample Prefix", err)
+}
     
-    return mulerr.IsError()
+return mulerr.IsError()
 ```
 
 
@@ -47,7 +47,7 @@ If you want customizing format error it will be simple like this.
 
 ```go
 var funcFormat = func(errorList []error) string {
-    if len(errorList) == 1 {
+ 	if len(errorList) == 1 {
 		return ""
 	}
 
@@ -55,7 +55,7 @@ var funcFormat = func(errorList []error) string {
 	for _, err := range errorList {
 		listErr += err.Error() + "\n"
 	}
-    return "[ERROR Change]" + listErr
+	return "[ERROR Change]" + listErr
 }
 
 merr.NewFormat(funcFormat)
