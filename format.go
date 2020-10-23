@@ -2,7 +2,7 @@ package merr
 
 // FormatErr is a basic formatter that outputs the error.
 func FormatErr(errorList []error) string {
-	if len(errorList) == 1 {
+	if len(errorList) == 0 {
 		return ""
 	}
 

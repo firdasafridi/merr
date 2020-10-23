@@ -12,6 +12,7 @@ for introspecting on error values.
 ## Documentation
 [![Go Doc](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/firdasafridi/merr)
 [![Go Report Card](https://goreportcard.com/badge/github.com/firdasafridi/merr)](https://goreportcard.com/report/github.com/firdasafridi/merr)
+[![Build Status](http://img.shields.io/travis/firdasafridi/merr.svg?style=flat-square)](https://travis-ci.org/firdasafridi/merr)
 
 
 
