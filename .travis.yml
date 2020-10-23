@@ -1,0 +1,12 @@
+sudo: false
+
+language: go
+
+go:
+  - 1.x
+
+branches:
+  only:
+    - main
+
+script: env GO111MODULE=on make test testrace

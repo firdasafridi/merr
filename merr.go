@@ -2,18 +2,24 @@ package merr
 
 import (
 	"fmt"
-	"log"
 
-	"github.com/friendsofgo/errors"
+	"github.com/pkg/errors"
 )
+
+var formatErr = FormatErr
 
 // Error is containt field to tract multiple errors. This accumulate errors.
 type Error struct {
 	Errors []error
 }
 
+// NewFormat change default format error it used
+func NewFormat(fErr func(errorList []error) string) {
+	formatErr = fErr
+}
+
 func (err *Error) Error() string {
-	return FormatErr(err.Errors)
+	return formatErr(err.Errors)
 }
 
 // Set is function to set new error if not found it will return no error
@@ -29,7 +35,6 @@ func (err *Error) SetPrefix(prefix string, newErr error) {
 	if newErr == nil {
 		return
 	}
-	log.Println(newErr.Error())
 	err.Errors = append(err.Errors, fmt.Errorf("[%s] %s", prefix, newErr))
 }
 
@@ -59,7 +64,7 @@ func (err *Error) WrappedErrors() []error {
 
 // Unwrap returns an error from Error (or nil if there are no errors).
 // This error returned will further support Unwrap to get the next error,
-// etc. The order will match the order of Errors in the multierror.Error
+// etc. The order will match the order of Errors in the merr.Error
 // at the time of calling.
 func (err *Error) Unwrap() error {
 	// If we have no errors then we do nothing
@@ -79,7 +84,7 @@ func (err *Error) Unwrap() error {
 }
 
 // chain implements the interfaces necessary for errors.Is/As/Unwrap to
-// work in a deterministic way with multierror. A chain tracks a list of
+// work in a deterministic way with merr. A chain tracks a list of
 // errors while accounting for the current represented error. This lets
 // Is/As be meaningful.
 type chain []error
