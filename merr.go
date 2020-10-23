@@ -7,13 +7,20 @@ import (
 	"github.com/friendsofgo/errors"
 )
 
+var formatErr = FormatErr
+
 // Error is containt field to tract multiple errors. This accumulate errors.
 type Error struct {
 	Errors []error
 }
 
+// NewFormat change default format error it used
+func NewFormat(fErr func(errorList []error) string) {
+	formatErr = fErr
+}
+
 func (err *Error) Error() string {
-	return FormatErr(err.Errors)
+	return formatErr(err.Errors)
 }
 
 // Set is function to set new error if not found it will return no error
