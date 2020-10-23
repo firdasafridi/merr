@@ -3,10 +3,10 @@ sudo: false
 language: go
 
 go:
-  - 1.x
+  - 1.14.4
 
 branches:
   only:
     - master
 
-script: env GO111MODULE=on make test testrace
+script: env GO111MODULE=on  go test -v -coverprofile=cover.out -cover -race `go list ./... | grep -v "vendor/" | grep -v "testfile/" | grep -v "vendor.orig/" | grep -v "docker/" | grep -v "mock/"`
